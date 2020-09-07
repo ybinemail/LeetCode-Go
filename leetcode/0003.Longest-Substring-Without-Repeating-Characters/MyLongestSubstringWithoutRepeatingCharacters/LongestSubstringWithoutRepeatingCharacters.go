@@ -34,6 +34,7 @@ func lengthOfLongestSubstring2(s string) int {
 	for i := 0; i < len(s); i++ {
 		length := 1
 		for j := i + 1; j < len(s); j++ {
+			// 双重循环判断是否存在
 			if strings.ContainsAny(s[i:j], string(s[j])) {
 				break
 			}
@@ -41,6 +42,7 @@ func lengthOfLongestSubstring2(s string) int {
 		}
 		longest = append(longest, length)
 	}
+	// 排序获取最长量
 	sort.Ints(longest)
 	if len(longest) > 0 {
 		return longest[len(longest)-1]

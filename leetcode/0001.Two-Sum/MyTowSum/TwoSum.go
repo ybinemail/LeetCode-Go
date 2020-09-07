@@ -1,9 +1,11 @@
 package MyTowSum
 
 func twoSum(nums []int, target int) []int {
+	// 暴力循环
 	index := []int{}
 	for i, v := range nums {
 		for j := i + 1; j < len(nums); j++ {
+			//从i的下一位开始判断，是否满足条件
 			if v+nums[j] == target {
 				index = append(index, i, j)
 			}

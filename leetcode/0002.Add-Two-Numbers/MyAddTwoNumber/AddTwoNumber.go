@@ -22,6 +22,7 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 	p1 := l1
 	p2 := l2
 	for {
+		// 循环相加每个节点的数值
 		p1.Val = p1.Val + p2.Val
 		if p1.Next == nil || p2.Next == nil {
 			break
@@ -30,15 +31,17 @@ func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 			p2 = p2.Next
 		}
 	}
-
+	// 针对未循环完的，指向过来
 	if p2.Next != nil {
 		p1.Next = p2.Next
 	}
+	// 算每个节点的进位
 	addSum(l1, 0)
 	return l1
 }
 
 func addSum(link *ListNode, add int) {
+	// 递归算每个节点进位
 	p := link
 	if p == nil {
 		return
