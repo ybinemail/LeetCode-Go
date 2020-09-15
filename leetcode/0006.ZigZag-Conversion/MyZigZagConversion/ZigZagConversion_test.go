@@ -1,6 +1,9 @@
 package MyZigZagConversion
 
-import "testing"
+import (
+	"reflect"
+	"testing"
+)
 
 /*将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。
 
@@ -32,28 +35,22 @@ T     S     G
 来源：力扣（LeetCode）
 链接：https://leetcode-cn.com/problems/zigzag-conversion
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。*/
-type question6 struct {
-	param
-	answer
-}
-type param struct {
-	str  string
-	line int
-}
-type answer struct {
-	substr string
-}
 
 func TestZigZagConversion(t *testing.T) {
-	qs := []question6{
-		{
-			param{"LEETCODEISHIRING", 4}, answer{"LCIRETOESIIGEDHN"},
-		},
-		{
-			param{"LEETCODEISHIRING", 3}, answer{"LDREOEIIECIHNTSG"},
-		},
+	type test struct {
+		s       string
+		numRows int
+		want    string
 	}
-	for _, v := range qs {
-		t.Logf("input param %v, output answer : %s <=> %s ", v.param, v.answer.substr, (v.param.str))
+	tests := map[string]test{
+		"case_1": {"LEETCODEISHIRING", 4, "LCIRETOESIIGEDHN"},
+		"case_2": {"LEETCODEISHIRING", 3, "LDREOEIIECIHNTSG"},
+	}
+
+	for name, ts := range tests {
+		got := convert(ts.s, ts.numRows)
+		if !reflect.DeepEqual(got, ts.want) {
+			t.Errorf("name:%s excepted:%#v, got:%#v", name, ts.want, got)
+		}
 	}
 }

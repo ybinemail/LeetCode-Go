@@ -1,7 +1,7 @@
 package leetcode
 
 import (
-	"fmt"
+	"reflect"
 	"testing"
 )
 
@@ -25,39 +25,21 @@ type ans1 struct {
 
 func Test_Problem1(t *testing.T) {
 
-	qs := []question1{
-		{
-			para1{[]int{3, 2, 4}, 6},
-			ans1{[]int{1, 2}},
-		},
-
-		{
-			para1{[]int{3, 2, 4}, 5},
-			ans1{[]int{0, 1}},
-		},
-
-		{
-			para1{[]int{0, 8, 7, 3, 3, 4, 2}, 11},
-			ans1{[]int{1, 3}},
-		},
-
-		{
-			para1{[]int{0, 1}, 1},
-			ans1{[]int{0, 1}},
-		},
-
-		{
-			para1{[]int{0, 3}, 5},
-			ans1{[]int{}},
-		},
-		// 如需多个测试，可以复制上方元素。
+	type test struct {
+		nums   []int
+		target int
+		want   []int
+	}
+	tests := map[string]test{
+		"case_1": {nums: []int{3, 2, 4}, target: 6, want: []int{1, 2}},
+		"case_2": {nums: []int{3, 2, 4}, target: 5, want: []int{1, 2}},
+		"case_3": {nums: []int{0, 8, 7, 3, 3, 4, 2}, target: 11, want: []int{1, 3}},
 	}
 
-	fmt.Printf("------------------------Leetcode Problem 1------------------------\n")
-
-	for _, q := range qs {
-		_, p := q.ans1, q.para1
-		fmt.Printf("【input】:%v       【output】:%v\n", p, twoSum(p.nums, p.target))
+	for name, ts := range tests {
+		got := twoSum(ts.nums, ts.target)
+		if !reflect.DeepEqual(got, ts.want) {
+			t.Errorf("name:%s excepted:%#v, got:%#v", name, ts.want, got)
+		}
 	}
-	fmt.Printf("\n\n\n")
 }
