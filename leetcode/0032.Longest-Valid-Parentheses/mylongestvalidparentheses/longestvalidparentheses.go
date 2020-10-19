@@ -1,4 +1,4 @@
-package longestvalidparentheses
+package mylongestvalidparentheses
 
 import "strings"
 
